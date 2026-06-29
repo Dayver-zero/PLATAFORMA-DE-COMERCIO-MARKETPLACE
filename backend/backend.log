@@ -1,0 +1,840 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.marketplace:marketplace-pacccioli >----------------
+[INFO] Building Plataforma de Comercio Local Inteligente 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ marketplace-pacccioli >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ marketplace-pacccioli ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ marketplace-pacccioli ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ marketplace-pacccioli ---
+[INFO] skip non existing resourceDirectory C:\Users\Dayver\Documents\Gestion\marketplace-pacccioli\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ marketplace-pacccioli ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 3 source files with javac [debug release 21] to target\test-classes
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ marketplace-pacccioli <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ marketplace-pacccioli ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-06-29T14:53:46.753-04:00  INFO 11624 --- [  restartedMain] c.m.p.MarketplacePacccioliApplication    : Starting MarketplacePacccioliApplication using Java 26.0.1 with PID 11624 (C:\Users\Dayver\Documents\Gestion\marketplace-pacccioli\backend\target\classes started by Dayver in C:\Users\Dayver\Documents\Gestion\marketplace-pacccioli\backend)
+2026-06-29T14:53:46.759-04:00 DEBUG 11624 --- [  restartedMain] c.m.p.MarketplacePacccioliApplication    : Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-06-29T14:53:46.763-04:00  INFO 11624 --- [  restartedMain] c.m.p.MarketplacePacccioliApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-06-29T14:53:46.856-04:00  INFO 11624 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-06-29T14:53:46.856-04:00  INFO 11624 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-06-29T14:53:48.060-04:00  INFO 11624 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-29T14:53:48.200-04:00  INFO 11624 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 132 ms. Found 9 JPA repository interfaces.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/Users/Dayver/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.16/tomcat-embed-core-10.1.16.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-06-29T14:53:49.263-04:00  INFO 11624 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-06-29T14:53:49.286-04:00  INFO 11624 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-29T14:53:49.287-04:00  INFO 11624 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-06-29T14:53:49.369-04:00  INFO 11624 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-06-29T14:53:49.371-04:00  INFO 11624 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2514 ms
+2026-06-29T14:53:49.533-04:00 DEBUG 11624 --- [  restartedMain] c.m.pacccioli.security.JwtFilter         : Filter 'jwtFilter' configured for use
+2026-06-29T14:53:49.629-04:00  INFO 11624 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-29T14:53:49.871-04:00  INFO 11624 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@208979a1
+2026-06-29T14:53:49.873-04:00  INFO 11624 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-29T14:53:49.975-04:00  INFO 11624 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-29T14:53:50.047-04:00  INFO 11624 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2026-06-29T14:53:50.103-04:00  INFO 11624 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-06-29T14:53:50.367-04:00  INFO 11624 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-29T14:53:50.448-04:00  WARN 11624 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-29T14:53:51.679-04:00  INFO 11624 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    alter table carrito_items 
+       drop 
+       foreign key FKrtdnie5q1ntdbm7edy7n7fmvd
+Hibernate: 
+    alter table carrito_items 
+       drop 
+       foreign key FKfaxp2h71mb51yhv0atg107irl
+Hibernate: 
+    alter table carritos 
+       drop 
+       foreign key FK1oqtem41uj4podo8a2lbsyyhm
+Hibernate: 
+    alter table comercios 
+       drop 
+       foreign key FKjhqfopamr2ql8e35mto9fpgxs
+Hibernate: 
+    alter table interacciones 
+       drop 
+       foreign key FKd2g8a0xn5dgmxoj95ok3gf3of
+Hibernate: 
+    alter table interacciones 
+       drop 
+       foreign key FK5yrx0yyak6h45s3illxpbjr5h
+Hibernate: 
+    alter table pedido_items 
+       drop 
+       foreign key FKnchocvgm3pbl25qxityq2whip
+Hibernate: 
+    alter table pedido_items 
+       drop 
+       foreign key FK7com1jkt4sj1l8q3y798uwf8
+Hibernate: 
+    alter table pedidos 
+       drop 
+       foreign key FK5g0es69v35nmkmpi8uewbphs2
+Hibernate: 
+    alter table productos 
+       drop 
+       foreign key FK79mryn5kkfiko2sev4cfrm687
+Hibernate: 
+    alter table reservas 
+       drop 
+       foreign key FKlcorg2nui6idmn198q94ajs6o
+Hibernate: 
+    alter table reservas 
+       drop 
+       foreign key FKemr5mamcwq9ui20y08devm32q
+Hibernate: 
+    alter table reservas 
+       drop 
+       foreign key FKcfh7qcr7oxomqk5hhbxdg2m7p
+Hibernate: 
+    drop table if exists carrito_items
+Hibernate: 
+    drop table if exists carritos
+Hibernate: 
+    drop table if exists comercios
+Hibernate: 
+    drop table if exists interacciones
+Hibernate: 
+    drop table if exists pedido_items
+Hibernate: 
+    drop table if exists pedidos
+Hibernate: 
+    drop table if exists productos
+Hibernate: 
+    drop table if exists reservas
+Hibernate: 
+    drop table if exists usuarios
+Hibernate: 
+    create table carrito_items (
+        cantidad integer not null,
+        carrito_id bigint not null,
+        fecha_agregado datetime(6) not null,
+        id bigint not null auto_increment,
+        producto_id bigint not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table carritos (
+        fecha_actualizacion datetime(6) not null,
+        fecha_creacion datetime(6) not null,
+        id bigint not null auto_increment,
+        usuario_id bigint not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table comercios (
+        activo bit not null,
+        calificacion float(53),
+        latitud float(53) not null,
+        longitud float(53) not null,
+        numero_reseñas integer,
+        fecha_actualizacion datetime(6) not null,
+        fecha_creacion datetime(6) not null,
+        id bigint not null auto_increment,
+        propietario_id bigint not null,
+        telefono varchar(20),
+        email varchar(100),
+        horario_atencion varchar(100),
+        nombre varchar(100) not null,
+        descripcion varchar(500) not null,
+        imagen_url varchar(500),
+        direccion varchar(255),
+        categoria enum ('RESTAURANTE','CAFE','TIENDA_ROPA','SUPERMERCADO','FARMACIA','LIBRERIA','ELECTRONICA','HOGAR','DEPORTES','BELLEZA','OTROS') not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table interacciones (
+        cantidad integer,
+        latitud_usuario float(53),
+        longitud_usuario float(53),
+        precio_momento decimal(10,2),
+        fecha_interaccion datetime(6) not null,
+        id bigint not null auto_increment,
+        producto_id bigint not null,
+        usuario_id bigint not null,
+        contexto_clima TEXT,
+        fuente enum ('BUSQUEDA','RECOMENDACION','DIRECTO','PROMOCION','FEED'),
+        tipo_interaccion enum ('VISUALIZACION','CLICK','COMPRA','FAVORITO') not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table pedido_items (
+        cantidad integer not null,
+        precio_unitario decimal(10,2) not null,
+        subtotal decimal(12,2) not null,
+        id bigint not null auto_increment,
+        pedido_id bigint not null,
+        producto_id bigint not null,
+        nombre_producto varchar(100) not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table pedidos (
+        total decimal(12,2) not null,
+        fecha_creacion datetime(6) not null,
+        fecha_pago datetime(6),
+        id bigint not null auto_increment,
+        usuario_id bigint not null,
+        codigo_pago varchar(30),
+        referencia_pago varchar(100),
+        comprobante_url varchar(500),
+        direccion_envio varchar(500),
+        notas TEXT,
+        estado enum ('PENDIENTE','CONFIRMADO','ENVIADO','ENTREGADO','CANCELADO') not null,
+        metodo_pago enum ('EFECTIVO','YAPE','TARJETA') not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table productos (
+        activo bit not null,
+        calificacion_promedio float(53),
+        conteo_compras integer,
+        conteo_visualizaciones integer,
+        permite_pago_adelantado bit not null,
+        permite_reserva bit not null,
+        precio decimal(10,2) not null,
+        stock integer not null,
+        comercio_id bigint not null,
+        fecha_actualizacion datetime(6) not null,
+        fecha_creacion datetime(6) not null,
+        id bigint not null auto_increment,
+        nombre varchar(100) not null,
+        descripcion varchar(500) not null,
+        url_imagen varchar(500),
+        etiquetas_inteligentes TEXT,
+        categoria enum ('ROPA','ACCESORIOS','COMIDA','BEBIDA','ELECTRONICA','HOGAR','DEPORTES','BELLEZA','SALUD','LIBROS','JUGUETES','OTROS') not null,
+        estado enum ('DISPONIBLE','AGOTADO','DESCONTINUADO') not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table reservas (
+        cantidad integer not null,
+        comercio_id bigint not null,
+        fecha_expiracion datetime(6) not null,
+        fecha_reserva datetime(6) not null,
+        id bigint not null auto_increment,
+        producto_id bigint not null,
+        usuario_id bigint not null,
+        notas TEXT,
+        estado enum ('PENDIENTE','CONFIRMADA','CANCELADA','COMPLETADA') not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    create table usuarios (
+        activo bit not null,
+        latitud float(53),
+        longitud float(53),
+        radio_busqueda_km integer,
+        fecha_actualizacion datetime(6) not null,
+        fecha_creacion datetime(6) not null,
+        id bigint not null auto_increment,
+        telefono varchar(20),
+        username varchar(50) not null,
+        apellidos varchar(100),
+        email varchar(100) not null,
+        nombre varchar(100),
+        password varchar(100) not null,
+        direccion varchar(255),
+        historial_busqueda TEXT,
+        preferencias TEXT,
+        rol enum ('CLIENTE','COMERCIANTE','ADMIN') not null,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    alter table carritos 
+       add constraint UK_dqb2sn4sl6ioxpxtm72doib9p unique (usuario_id)
+Hibernate: 
+    alter table usuarios 
+       add constraint UK_m2dvbwfge291euvmk6vkkocao unique (username)
+Hibernate: 
+    alter table usuarios 
+       add constraint UK_kfsp0s1tflm1cwlj8idhqsad0 unique (email)
+Hibernate: 
+    alter table carrito_items 
+       add constraint FKrtdnie5q1ntdbm7edy7n7fmvd 
+       foreign key (carrito_id) 
+       references carritos (id)
+Hibernate: 
+    alter table carrito_items 
+       add constraint FKfaxp2h71mb51yhv0atg107irl 
+       foreign key (producto_id) 
+       references productos (id)
+Hibernate: 
+    alter table carritos 
+       add constraint FK1oqtem41uj4podo8a2lbsyyhm 
+       foreign key (usuario_id) 
+       references usuarios (id)
+Hibernate: 
+    alter table comercios 
+       add constraint FKjhqfopamr2ql8e35mto9fpgxs 
+       foreign key (propietario_id) 
+       references usuarios (id)
+Hibernate: 
+    alter table interacciones 
+       add constraint FKd2g8a0xn5dgmxoj95ok3gf3of 
+       foreign key (producto_id) 
+       references productos (id)
+Hibernate: 
+    alter table interacciones 
+       add constraint FK5yrx0yyak6h45s3illxpbjr5h 
+       foreign key (usuario_id) 
+       references usuarios (id)
+Hibernate: 
+    alter table pedido_items 
+       add constraint FKnchocvgm3pbl25qxityq2whip 
+       foreign key (pedido_id) 
+       references pedidos (id)
+Hibernate: 
+    alter table pedido_items 
+       add constraint FK7com1jkt4sj1l8q3y798uwf8 
+       foreign key (producto_id) 
+       references productos (id)
+Hibernate: 
+    alter table pedidos 
+       add constraint FK5g0es69v35nmkmpi8uewbphs2 
+       foreign key (usuario_id) 
+       references usuarios (id)
+Hibernate: 
+    alter table productos 
+       add constraint FK79mryn5kkfiko2sev4cfrm687 
+       foreign key (comercio_id) 
+       references comercios (id)
+Hibernate: 
+    alter table reservas 
+       add constraint FKlcorg2nui6idmn198q94ajs6o 
+       foreign key (comercio_id) 
+       references comercios (id)
+Hibernate: 
+    alter table reservas 
+       add constraint FKemr5mamcwq9ui20y08devm32q 
+       foreign key (producto_id) 
+       references productos (id)
+Hibernate: 
+    alter table reservas 
+       add constraint FKcfh7qcr7oxomqk5hhbxdg2m7p 
+       foreign key (usuario_id) 
+       references usuarios (id)
+2026-06-29T14:53:53.927-04:00  INFO 11624 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-29T14:53:54.528-04:00  INFO 11624 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+=== SecurityConfig cargado ===
+2026-06-29T14:53:55.844-04:00  WARN 11624 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-29T14:53:55.915-04:00  WARN 11624 --- [  restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ef42b513-4618-4ec5-bb26-3d7da00fa1db
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-06-29T14:53:56.316-04:00  INFO 11624 --- [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4e0a9c19, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3d203f75, org.springframework.security.web.context.SecurityContextHolderFilter@62e8ca14, org.springframework.security.web.header.HeaderWriterFilter@35ab641a, org.springframework.web.filter.CorsFilter@f7a0f2a, org.springframework.security.web.authentication.logout.LogoutFilter@783727, com.marketplace.pacccioli.security.JwtFilter@7d2d81c7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3c4d3bcf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@48360c93, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@432678fd, org.springframework.security.web.access.ExceptionTranslationFilter@41883217, org.springframework.security.web.access.intercept.AuthorizationFilter@4b4713ce]
+2026-06-29T14:53:56.635-04:00  INFO 11624 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-06-29T14:53:56.695-04:00  INFO 11624 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-06-29T14:53:56.704-04:00  INFO 11624 --- [  restartedMain] c.m.p.MarketplacePacccioliApplication    : Started MarketplacePacccioliApplication in 11.334 seconds (process running for 12.138)
+Hibernate: 
+    select
+        count(*) 
+    from
+        productos p1_0
+2026-06-29T14:53:56.811-04:00  INFO 11624 --- [  restartedMain] c.m.pacccioli.config.DataSeeder          : Insertando datos de prueba...
+Hibernate: 
+    select
+        ci1_0.id,
+        ci1_0.cantidad,
+        ci1_0.carrito_id,
+        ci1_0.fecha_agregado,
+        ci1_0.producto_id 
+    from
+        carrito_items ci1_0
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.fecha_actualizacion,
+        c1_0.fecha_creacion,
+        c1_0.usuario_id 
+    from
+        carritos c1_0
+Hibernate: 
+    select
+        pi1_0.id,
+        pi1_0.cantidad,
+        pi1_0.nombre_producto,
+        pi1_0.pedido_id,
+        pi1_0.precio_unitario,
+        pi1_0.producto_id,
+        pi1_0.subtotal 
+    from
+        pedido_items pi1_0
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.codigo_pago,
+        p1_0.comprobante_url,
+        p1_0.direccion_envio,
+        p1_0.estado,
+        p1_0.fecha_creacion,
+        p1_0.fecha_pago,
+        p1_0.metodo_pago,
+        p1_0.notas,
+        p1_0.referencia_pago,
+        p1_0.total,
+        p1_0.usuario_id 
+    from
+        pedidos p1_0
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.cantidad,
+        r1_0.comercio_id,
+        r1_0.estado,
+        r1_0.fecha_expiracion,
+        r1_0.fecha_reserva,
+        r1_0.notas,
+        r1_0.producto_id,
+        r1_0.usuario_id 
+    from
+        reservas r1_0
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.cantidad,
+        i1_0.contexto_clima,
+        i1_0.fecha_interaccion,
+        i1_0.fuente,
+        i1_0.latitud_usuario,
+        i1_0.longitud_usuario,
+        i1_0.precio_momento,
+        i1_0.producto_id,
+        i1_0.tipo_interaccion,
+        i1_0.usuario_id 
+    from
+        interacciones i1_0
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.activo,
+        p1_0.calificacion_promedio,
+        p1_0.categoria,
+        p1_0.comercio_id,
+        p1_0.conteo_compras,
+        p1_0.conteo_visualizaciones,
+        p1_0.descripcion,
+        p1_0.estado,
+        p1_0.etiquetas_inteligentes,
+        p1_0.fecha_actualizacion,
+        p1_0.fecha_creacion,
+        p1_0.nombre,
+        p1_0.permite_pago_adelantado,
+        p1_0.permite_reserva,
+        p1_0.precio,
+        p1_0.stock,
+        p1_0.url_imagen 
+    from
+        productos p1_0
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.activo,
+        c1_0.calificacion,
+        c1_0.categoria,
+        c1_0.descripcion,
+        c1_0.direccion,
+        c1_0.email,
+        c1_0.fecha_actualizacion,
+        c1_0.fecha_creacion,
+        c1_0.horario_atencion,
+        c1_0.imagen_url,
+        c1_0.latitud,
+        c1_0.longitud,
+        c1_0.nombre,
+        c1_0.numero_reseñas,
+        c1_0.propietario_id,
+        c1_0.telefono 
+    from
+        comercios c1_0
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.activo,
+        u1_0.apellidos,
+        u1_0.direccion,
+        u1_0.email,
+        u1_0.fecha_actualizacion,
+        u1_0.fecha_creacion,
+        u1_0.historial_busqueda,
+        u1_0.latitud,
+        u1_0.longitud,
+        u1_0.nombre,
+        u1_0.password,
+        u1_0.preferencias,
+        u1_0.radio_busqueda_km,
+        u1_0.rol,
+        u1_0.telefono,
+        u1_0.username 
+    from
+        usuarios u1_0
+2026-06-29T14:53:56.888-04:00  INFO 11624 --- [  restartedMain] c.m.pacccioli.config.DataSeeder          : Datos existentes eliminados
+Hibernate: 
+    insert 
+    into
+        usuarios
+        (activo, apellidos, direccion, email, fecha_actualizacion, fecha_creacion, historial_busqueda, latitud, longitud, nombre, password, preferencias, radio_busqueda_km, rol, telefono, username) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        usuarios
+        (activo, apellidos, direccion, email, fecha_actualizacion, fecha_creacion, historial_busqueda, latitud, longitud, nombre, password, preferencias, radio_busqueda_km, rol, telefono, username) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        usuarios
+        (activo, apellidos, direccion, email, fecha_actualizacion, fecha_creacion, historial_busqueda, latitud, longitud, nombre, password, preferencias, radio_busqueda_km, rol, telefono, username) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        usuarios
+        (activo, apellidos, direccion, email, fecha_actualizacion, fecha_creacion, historial_busqueda, latitud, longitud, nombre, password, preferencias, radio_busqueda_km, rol, telefono, username) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        usuarios
+        (activo, apellidos, direccion, email, fecha_actualizacion, fecha_creacion, historial_busqueda, latitud, longitud, nombre, password, preferencias, radio_busqueda_km, rol, telefono, username) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-06-29T14:53:57.026-04:00  INFO 11624 --- [  restartedMain] c.m.pacccioli.config.DataSeeder          : Usuarios insertados: 5
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.activo,
+        u1_0.apellidos,
+        u1_0.direccion,
+        u1_0.email,
+        u1_0.fecha_actualizacion,
+        u1_0.fecha_creacion,
+        u1_0.historial_busqueda,
+        u1_0.latitud,
+        u1_0.longitud,
+        u1_0.nombre,
+        u1_0.password,
+        u1_0.preferencias,
+        u1_0.radio_busqueda_km,
+        u1_0.rol,
+        u1_0.telefono,
+        u1_0.username 
+    from
+        usuarios u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.activo,
+        u1_0.apellidos,
+        u1_0.direccion,
+        u1_0.email,
+        u1_0.fecha_actualizacion,
+        u1_0.fecha_creacion,
+        u1_0.historial_busqueda,
+        u1_0.latitud,
+        u1_0.longitud,
+        u1_0.nombre,
+        u1_0.password,
+        u1_0.preferencias,
+        u1_0.radio_busqueda_km,
+        u1_0.rol,
+        u1_0.telefono,
+        u1_0.username 
+    from
+        usuarios u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    insert 
+    into
+        comercios
+        (activo, calificacion, categoria, descripcion, direccion, email, fecha_actualizacion, fecha_creacion, horario_atencion, imagen_url, latitud, longitud, nombre, numero_reseñas, propietario_id, telefono) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        comercios
+        (activo, calificacion, categoria, descripcion, direccion, email, fecha_actualizacion, fecha_creacion, horario_atencion, imagen_url, latitud, longitud, nombre, numero_reseñas, propietario_id, telefono) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        comercios
+        (activo, calificacion, categoria, descripcion, direccion, email, fecha_actualizacion, fecha_creacion, horario_atencion, imagen_url, latitud, longitud, nombre, numero_reseñas, propietario_id, telefono) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        comercios
+        (activo, calificacion, categoria, descripcion, direccion, email, fecha_actualizacion, fecha_creacion, horario_atencion, imagen_url, latitud, longitud, nombre, numero_reseñas, propietario_id, telefono) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-06-29T14:53:57.082-04:00  INFO 11624 --- [  restartedMain] c.m.pacccioli.config.DataSeeder          : Comercios insertados: 4
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        productos
+        (activo, calificacion_promedio, categoria, comercio_id, conteo_compras, conteo_visualizaciones, descripcion, estado, etiquetas_inteligentes, fecha_actualizacion, fecha_creacion, nombre, permite_pago_adelantado, permite_reserva, precio, stock, url_imagen) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-06-29T14:53:57.128-04:00  INFO 11624 --- [  restartedMain] c.m.pacccioli.config.DataSeeder          : Productos insertados: 12
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.activo,
+        u1_0.apellidos,
+        u1_0.direccion,
+        u1_0.email,
+        u1_0.fecha_actualizacion,
+        u1_0.fecha_creacion,
+        u1_0.historial_busqueda,
+        u1_0.latitud,
+        u1_0.longitud,
+        u1_0.nombre,
+        u1_0.password,
+        u1_0.preferencias,
+        u1_0.radio_busqueda_km,
+        u1_0.rol,
+        u1_0.telefono,
+        u1_0.username 
+    from
+        usuarios u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.activo,
+        u1_0.apellidos,
+        u1_0.direccion,
+        u1_0.email,
+        u1_0.fecha_actualizacion,
+        u1_0.fecha_creacion,
+        u1_0.historial_busqueda,
+        u1_0.latitud,
+        u1_0.longitud,
+        u1_0.nombre,
+        u1_0.password,
+        u1_0.preferencias,
+        u1_0.radio_busqueda_km,
+        u1_0.rol,
+        u1_0.telefono,
+        u1_0.username 
+    from
+        usuarios u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        interacciones
+        (cantidad, contexto_clima, fecha_interaccion, fuente, latitud_usuario, longitud_usuario, precio_momento, producto_id, tipo_interaccion, usuario_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-06-29T14:53:57.173-04:00  INFO 11624 --- [  restartedMain] c.m.pacccioli.config.DataSeeder          : Interacciones insertadas: 13
+2026-06-29T14:53:57.173-04:00  INFO 11624 --- [  restartedMain] c.m.pacccioli.config.DataSeeder          : Datos de prueba insertados exitosamente
