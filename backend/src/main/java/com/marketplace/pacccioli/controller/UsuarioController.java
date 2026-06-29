@@ -8,6 +8,7 @@ import com.marketplace.pacccioli.model.Usuario;
 import com.marketplace.pacccioli.repository.ComercioRepository;
 import com.marketplace.pacccioli.repository.ProductoRepository;
 import com.marketplace.pacccioli.repository.UsuarioRepository;
+import com.marketplace.pacccioli.security.JwtProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,6 +33,9 @@ public class UsuarioController {
     
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private JwtProvider jwtProvider;
     
     /**
      * GET /api/usuarios/{id} - Obtener un usuario por ID
@@ -334,8 +339,13 @@ public class UsuarioController {
             Usuario actualizado = usuarioRepository.save(usuario);
 
             UsuarioDTO dto = convertirADTO(actualizado);
+            String nuevoToken = jwtProvider.generateToken(
+                    actualizado.getId(), actualizado.getEmail(), nuevoRol.name());
+            Map<String, Object> data = new HashMap<>();
+            data.put("usuario", dto);
+            data.put("token", nuevoToken);
             return ResponseEntity.ok(new ApiResponseDTO<>(true,
-                    "Rol cambiado a " + nuevoRol.name() + " exitosamente", dto));
+                    "Rol cambiado a " + nuevoRol.name() + " exitosamente", data));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

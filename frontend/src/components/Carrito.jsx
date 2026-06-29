@@ -100,7 +100,7 @@ const Carrito = ({ onNavigate }) => {
             {carrito.items.map((item) => (
               <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex gap-4">
                 <img
-                  src={item.urlImagen || 'https://via.placeholder.com/100'}
+                  src={item.urlImagen || '/uploads/productos/sin-imagen.svg'}
                   alt={item.nombreProducto}
                   className="w-24 h-24 object-cover rounded-lg"
                   loading="lazy"

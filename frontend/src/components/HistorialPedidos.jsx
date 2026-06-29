@@ -124,7 +124,7 @@ const HistorialPedidos = ({ onNavigate }) => {
                     <div className="mt-4 border-t border-gray-100 pt-4 space-y-2">
                       {pedido.items?.map((item) => (
                         <div key={item.id} className="flex items-center gap-3 text-sm">
-                          <img src={item.urlImagen || 'https://via.placeholder.com/40'} alt={item.nombreProducto}
+                          <img src={item.urlImagen || '/uploads/productos/sin-imagen.svg'} alt={item.nombreProducto}
                             className="w-10 h-10 object-cover rounded" />
                           <div className="flex-1">
                             <p className="font-medium text-gray-900">{item.nombreProducto}</p>

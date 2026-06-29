@@ -67,7 +67,7 @@ const MisReservas = ({ onNavigate }) => {
             return (
               <div key={reserva.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6">
                 <div className="flex gap-4">
-                  <img src={reserva.urlImagen || 'https://via.placeholder.com/80'} alt={reserva.nombreProducto}
+                  <img src={reserva.urlImagen || '/uploads/productos/sin-imagen.svg'} alt={reserva.nombreProducto}
                     className="w-20 h-20 object-cover rounded-lg" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between">

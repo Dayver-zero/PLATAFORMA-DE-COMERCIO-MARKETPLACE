@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Building2, Star, Heart, ShoppingCart, Calendar, Smartphone, Check, Loader2 } from 'lucide-react';
 import carritoService from '../services/carritoService';
 
+const API_HOST = (import.meta.env.VITE_API_URL || 'http://localhost:8080').replace(/\/api\/?$/, '');
+
 const etiquetaConfig = {
   lluvia: { emoji: String.fromCodePoint(0x1F327, 0xFE0F), color: 'bg-blue-100 text-blue-800' },
   frio: { emoji: String.fromCodePoint(0x2744, 0xFE0F), color: 'bg-cyan-100 text-cyan-800' },
@@ -86,7 +88,7 @@ const ProductCard = ({ producto, onNavigate, onReservar, onMostrarMensaje }) => 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="relative">
-        <img src={producto.urlImagen || producto.imagenUrl} alt={producto.nombre}
+        <img src={producto.urlImagen ? (producto.urlImagen.startsWith('http') ? producto.urlImagen : `${API_HOST}${producto.urlImagen}`) : (producto.imagenUrl || '/uploads/productos/sin-imagen.svg')} alt={producto.nombre}
           className="w-full h-48 object-cover" loading="lazy" />
         <button onClick={() => console.log('Favorito:', producto.nombre)}
           className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors" title="Agregar a favoritos">

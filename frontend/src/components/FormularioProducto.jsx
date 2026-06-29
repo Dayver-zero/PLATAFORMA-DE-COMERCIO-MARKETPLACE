@@ -9,7 +9,7 @@ const CATEGORIAS = [
 
 const ESTADOS = ['DISPONIBLE', 'AGOTADO', 'DESCONTINUADO'];
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const API_HOST = (import.meta.env.VITE_API_URL || 'http://localhost:8080').replace(/\/api\/?$/, '');
 
 function FormularioProducto({ producto, comercioId, onGuardado, onCancelar }) {
   const esEdicion = !!producto;
@@ -166,7 +166,7 @@ function FormularioProducto({ producto, comercioId, onGuardado, onCancelar }) {
         {previewUrl && (
           <div className="relative mb-3 inline-block">
             <img
-              src={previewUrl.startsWith('http') ? previewUrl : `${API_BASE}${previewUrl}`}
+              src={previewUrl.startsWith('http') ? previewUrl : `${API_HOST}${previewUrl}`}
               alt="Preview"
               className="h-32 w-32 object-cover rounded-xl border border-gray-200 shadow-sm"
               onError={(e) => { e.target.style.display = 'none'; }}

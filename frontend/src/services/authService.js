@@ -157,15 +157,19 @@ const authService = {
    * @param {string} nuevoRol - CLIENTE | COMERCIANTE
    * @returns {Promise}
    */
-  cambiarRol: async (id, nuevoRol) => {
+   cambiarRol: async (id, nuevoRol) => {
     try {
       const response = await api.put(`/usuarios/${id}/rol`, { rol: nuevoRol });
       if (response.exito && response.datos) {
+        if (response.datos.token) {
+          localStorage.setItem('jwtToken', response.datos.token);
+        }
+        const userData = response.datos.usuario || response.datos;
         localStorage.setItem('usuario', JSON.stringify({
-          id: response.datos.id,
-          nombre: response.datos.nombre,
-          email: response.datos.email,
-          rol: response.datos.rol,
+          id: userData.id,
+          nombre: userData.nombre,
+          email: userData.email,
+          rol: userData.rol,
         }));
       }
       return response;

@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Edit, Trash2, Package, Search, AlertCircle } from 'lucide-react';
 import productosService from '../services/productosService';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const API_HOST = (import.meta.env.VITE_API_URL || 'http://localhost:8080').replace(/\/api\/?$/, '');
 
 function TablaInventario({ productos, onEditar, onEliminado }) {
   const [busqueda, setBusqueda] = useState('');
@@ -88,7 +88,7 @@ function TablaInventario({ productos, onEditar, onEliminado }) {
                     {/* Imagen miniatura */}
                     {producto.urlImagen ? (
                       <img
-                        src={producto.urlImagen.startsWith('http') ? producto.urlImagen : `${API_BASE}${producto.urlImagen}`}
+                        src={producto.urlImagen.startsWith('http') ? producto.urlImagen : `${API_HOST}${producto.urlImagen}`}
                         alt={producto.nombre}
                         className="h-10 w-10 rounded-lg object-cover border border-gray-200"
                         onError={(e) => { e.target.style.display = 'none'; }}

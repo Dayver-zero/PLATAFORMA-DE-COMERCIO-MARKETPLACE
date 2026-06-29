@@ -75,7 +75,7 @@ const ModalReserva = ({ producto, onClose, onNavigate }) => {
 
         <div className="flex gap-4 mb-6">
           <img
-            src={producto.urlImagen || 'https://via.placeholder.com/80'}
+            src={producto.urlImagen || '/uploads/productos/sin-imagen.svg'}
             alt={producto.nombre}
             className="w-20 h-20 object-cover rounded-lg"
           />

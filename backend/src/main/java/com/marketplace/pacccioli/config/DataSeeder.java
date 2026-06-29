@@ -262,7 +262,7 @@ public class DataSeeder implements CommandLineRunner {
         p.setDescripcion(descripcion);
         p.setPrecio(BigDecimal.valueOf(precio));
         p.setStock(stock);
-        p.setUrlImagen("https://via.placeholder.com/200?text=" + java.net.URLEncoder.encode(nombre, java.nio.charset.StandardCharsets.UTF_8));
+        p.setUrlImagen("/uploads/productos/sin-imagen.svg");
         p.setCategoria(Producto.Categoria.OTROS);
         p.setEtiquetasInteligentes(etiquetas);
         p.setCalificacionPromedio(calificacion);

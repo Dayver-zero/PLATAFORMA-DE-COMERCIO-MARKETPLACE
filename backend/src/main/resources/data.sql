@@ -45,24 +45,24 @@ INSERT IGNORE INTO comercio (id, nombre, descripcion, direccion, telefono, horar
 -- =====================================================================
 INSERT IGNORE INTO producto (id, nombre, descripcion, precio, stock, url_imagen, categoria, etiquetas_inteligentes, calificacion_promedio, conteo_visualizaciones, conteo_compras, comercio_id, activo, permite_reserva, permite_pago_adelantado, fecha_creacion, fecha_actualizacion) VALUES
 -- Productos de Tienda Central (1)
-(1, 'Paraguas Premium', 'Paraguas resistente al agua, 3 paneles apertura automática', 45.99, 20, 'https://via.placeholder.com/200?text=Paraguas', 'OTROS', '["lluvia","proteccion","imprescindible"]', 4.8, 150, 12, 1, true, true, true, NOW(), NOW()),
-(2, 'Chaqueta Térmica', 'Chaqueta acolchada para abrigo en clima frío', 89.99, 15, 'https://via.placeholder.com/200?text=Chaqueta', 'ROPA', '["frío","abrigo","invierno"]', 4.7, 200, 25, 1, true, true, false, NOW(), NOW()),
-(3, 'Sandalias Cómodas', 'Sandalias para clima cálido', 34.50, 30, 'https://via.placeholder.com/200?text=Sandalias', 'ROPA', '["calor","verano","comodidad"]', 4.4, 180, 35, 1, true, false, false, NOW(), NOW()),
-(4, 'Gafas de Sol UV', 'Gafas de protección solar', 52.00, 25, 'https://via.placeholder.com/200?text=Gafas', 'ACCESORIOS', '["soleado","proteccion","moda"]', 4.6, 220, 40, 1, true, true, true, NOW(), NOW()),
+(1, 'Paraguas Premium', 'Paraguas resistente al agua, 3 paneles apertura automática', 45.99, 20, '/uploads/productos/paraguas-premium.jpg', 'OTROS', '["lluvia","proteccion","imprescindible"]', 4.8, 150, 12, 1, true, true, true, NOW(), NOW()),
+(2, 'Chaqueta Térmica', 'Chaqueta acolchada para abrigo en clima frío', 89.99, 15, '/uploads/productos/chaqueta-termica.jpg', 'ROPA', '["frío","abrigo","invierno"]', 4.7, 200, 25, 1, true, true, false, NOW(), NOW()),
+(3, 'Sandalias Cómodas', 'Sandalias para clima cálido', 34.50, 30, '/uploads/productos/sandalias-comodas.jpg', 'ROPA', '["calor","verano","comodidad"]', 4.4, 180, 35, 1, true, false, false, NOW(), NOW()),
+(4, 'Gafas de Sol UV', 'Gafas de protección solar', 52.00, 25, '/uploads/productos/gafas-de-sol-uv.jpg', 'ACCESORIOS', '["soleado","proteccion","moda"]', 4.6, 220, 40, 1, true, true, true, NOW(), NOW()),
 
 -- Productos de Mercado Local (2)
-(5, 'Tomates Frescos', 'Tomates de temporada, producción local', 3.50, 100, 'https://via.placeholder.com/200?text=Tomates', 'COMIDA', '["alimentos","fresco","saludable"]', 4.9, 350, 120, 2, true, false, false, NOW(), NOW()),
-(6, 'Lechuga Orgánica', 'Lechuga verde orgánica, sin pesticidas', 2.75, 80, 'https://via.placeholder.com/200?text=Lechuga', 'COMIDA', '["alimentos","fresco","organico"]', 4.8, 280, 95, 2, true, false, false, NOW(), NOW()),
-(7, 'Papas Locales', 'Papas de variedad local, ideales para cocinar', 1.50, 200, 'https://via.placeholder.com/200?text=Papas', 'COMIDA', '["alimentos","basico","fresco"]', 4.7, 400, 250, 2, true, false, false, NOW(), NOW()),
-(8, 'Manzanas Frescas', 'Manzanas variedad roja, cosecha reciente', 4.20, 150, 'https://via.placeholder.com/200?text=Manzanas', 'COMIDA', '["alimentos","fruta","saludable"]', 4.5, 300, 110, 2, true, false, false, NOW(), NOW()),
+(5, 'Tomates Frescos', 'Tomates de temporada, producción local', 3.50, 100, '/uploads/productos/tomates-frescos.jpg', 'COMIDA', '["alimentos","fresco","saludable"]', 4.9, 350, 120, 2, true, false, false, NOW(), NOW()),
+(6, 'Lechuga Orgánica', 'Lechuga verde orgánica, sin pesticidas', 2.75, 80, '/uploads/productos/lechuga-organica.jfif', 'COMIDA', '["alimentos","fresco","organico"]', 4.8, 280, 95, 2, true, false, false, NOW(), NOW()),
+(7, 'Papas Locales', 'Papas de variedad local, ideales para cocinar', 1.50, 200, '/uploads/productos/papas-locales.jpg', 'COMIDA', '["alimentos","basico","fresco"]', 4.7, 400, 250, 2, true, false, false, NOW(), NOW()),
+(8, 'Manzanas Frescas', 'Manzanas variedad roja, cosecha reciente', 4.20, 150, '/uploads/productos/manzanas-frescas.jpg', 'COMIDA', '["alimentos","fruta","saludable"]', 4.5, 300, 110, 2, true, false, false, NOW(), NOW()),
 
 -- Productos de Boutique María (3)
-(9, 'Suéter de Lana', 'Suéter tejido de lana para abrigarse', 65.00, 10, 'https://via.placeholder.com/200?text=Sueter', 'ROPA', '["frío","abrigo","comodidad"]', 4.6, 120, 18, 3, true, true, true, NOW(), NOW()),
-(10, 'Shorts Deportivos', 'Shorts cómodos para clima cálido', 28.99, 25, 'https://via.placeholder.com/200?text=Shorts', 'ROPA', '["calor","deporte","verano"]', 4.3, 95, 22, 3, true, false, false, NOW(), NOW()),
+(9, 'Suéter de Lana', 'Suéter tejido de lana para abrigarse', 65.00, 10, '/uploads/productos/sueter-de-lana.jpg', 'ROPA', '["frío","abrigo","comodidad"]', 4.6, 120, 18, 3, true, true, true, NOW(), NOW()),
+(10, 'Shorts Deportivos', 'Shorts cómodos para clima cálido', 28.99, 25, '/uploads/productos/shorts-deportivos.jpg', 'ROPA', '["calor","deporte","verano"]', 4.3, 95, 22, 3, true, false, false, NOW(), NOW()),
 
 -- Productos de TechStore (4)
-(11, 'Power Bank 20000mAh', 'Batería externa con carga rápida', 55.00, 18, 'https://via.placeholder.com/200?text=PowerBank', 'ELECTRONICA', '["tecnologia","practico","viaje"]', 4.7, 160, 28, 4, true, true, true, NOW(), NOW()),
-(12, 'Cable USB-C', 'Cable de carga USB tipo C', 12.50, 50, 'https://via.placeholder.com/200?text=Cable', 'ELECTRONICA', '["tecnologia","basico","accesorio"]', 4.4, 180, 65, 4, true, false, true, NOW(), NOW());
+(11, 'Power Bank 20000mAh', 'Batería externa con carga rápida', 55.00, 18, '/uploads/productos/power-bank-20000mah.jpg', 'ELECTRONICA', '["tecnologia","practico","viaje"]', 4.7, 160, 28, 4, true, true, true, NOW(), NOW()),
+(12, 'Cable USB-C', 'Cable de carga USB tipo C', 12.50, 50, '/uploads/productos/cable-usb-c.jpeg', 'ELECTRONICA', '["tecnologia","basico","accesorio"]', 4.4, 180, 65, 4, true, false, true, NOW(), NOW());
 
 -- =====================================================================
 -- Interacciones de Usuario (comportamiento del usuario)
