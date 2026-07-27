@@ -262,7 +262,7 @@ public class UsuarioController {
      * COMERCIANTE -> CLIENTE: desactiva todos sus comercios y productos
      */
     @PutMapping("/{id}/rol")
-    public ResponseEntity<ApiResponseDTO<UsuarioDTO>> cambiarRol(
+    public ResponseEntity<ApiResponseDTO<Map<String, Object>>> cambiarRol(
             @PathVariable Long id,
             @RequestBody Map<String, String> body,
             HttpServletRequest request) {

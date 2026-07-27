@@ -30,6 +30,7 @@ public class PedidoService {
     private final CarritoService carritoService;
     private final UsuarioRepository usuarioRepository;
     private final ProductoRepository productoRepository;
+    private final PagoService pagoService;
 
     private static final String CARACTERES_CODIGO = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     private static final SecureRandom random = new SecureRandom();
@@ -116,8 +117,10 @@ public class PedidoService {
         EstadoPedido nuevoEstado = EstadoPedido.valueOf(nuevoEstadoStr.toUpperCase());
         pedido.setEstado(nuevoEstado);
 
-        if (nuevoEstado == EstadoPedido.CONFIRMADO && pedido.getMetodoPago() == MetodoPago.YAPE) {
+        if (nuevoEstado == EstadoPedido.PAGADO) {
             pedido.setFechaPago(LocalDateTime.now());
+            pagoService.registrarPago(id, pedido.getMetodoPago().name(),
+                    pedido.getCodigoPago(), pedido.getComprobanteUrl(), null);
         }
 
         pedido = pedidoRepository.save(pedido);
@@ -160,6 +163,68 @@ public class PedidoService {
         pedido.setComprobanteUrl(comprobanteUrl);
         pedido.setFechaPago(LocalDateTime.now());
         pedido = pedidoRepository.save(pedido);
+
+        pagoService.registrarPago(pedidoId, "YAPE", pedido.getCodigoPago(),
+                comprobanteUrl, "{\"referenciaPago\":\"" + referenciaPago + "\"}");
+
+        return convertirADTO(pedido);
+    }
+
+    @Transactional
+    public PedidoDTO verificarPago(Long id, Long usuarioId) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Pedido no encontrado: " + id));
+
+        boolean esComerciante = pedido.getItems().stream()
+                .anyMatch(i -> i.getProducto().getComercio().getPropietario().getId().equals(usuarioId));
+
+        if (!esComerciante) {
+            throw new SecurityException("No tienes permiso para verificar el pago de este pedido");
+        }
+
+        if (pedido.getEstado() != EstadoPedido.PENDIENTE) {
+            throw new IllegalStateException("El pedido no está en estado PENDIENTE");
+        }
+
+        if (pedido.getMetodoPago() == MetodoPago.YAPE && pedido.getReferenciaPago() == null) {
+            throw new IllegalStateException("El cliente aún no ha confirmado el pago YAPE");
+        }
+
+        pedido.setEstado(EstadoPedido.PAGADO);
+        pedido.setFechaPago(LocalDateTime.now());
+        pedido = pedidoRepository.save(pedido);
+
+        pagoService.registrarPago(id, pedido.getMetodoPago().name(),
+                pedido.getCodigoPago(), pedido.getComprobanteUrl(), null);
+
+        return convertirADTO(pedido);
+    }
+
+    @Transactional
+    public PedidoDTO procesarPagoTarjeta(Long pedidoId, Long usuarioId, String numeroTarjeta,
+                                          String titular, String fechaVencimiento, String cvv) {
+        Pedido pedido = pedidoRepository.findById(pedidoId)
+                .orElseThrow(() -> new EntityNotFoundException("Pedido no encontrado: " + pedidoId));
+
+        if (!pedido.getUsuario().getId().equals(usuarioId)) {
+            throw new SecurityException("No tienes permiso para pagar este pedido");
+        }
+
+        if (pedido.getMetodoPago() != MetodoPago.TARJETA) {
+            throw new IllegalStateException("El método de pago no es TARJETA");
+        }
+
+        if (pedido.getEstado() != EstadoPedido.PENDIENTE) {
+            throw new IllegalStateException("El pedido no está pendiente");
+        }
+
+        String ultimos4 = numeroTarjeta.length() >= 4
+                ? numeroTarjeta.substring(numeroTarjeta.length() - 4) : numeroTarjeta;
+        String metadata = String.format(
+                "{\"ultimos4\":\"%s\",\"titular\":\"%s\"}", ultimos4, titular);
+
+        pagoService.registrarPago(pedidoId, "TARJETA", null, null, metadata);
+
         return convertirADTO(pedido);
     }
 

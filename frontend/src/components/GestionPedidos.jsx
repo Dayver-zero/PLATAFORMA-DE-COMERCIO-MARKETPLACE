@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Package, Clock, CheckCircle, XCircle, Truck, CheckSquare, Loader2 } from 'lucide-react';
+import { Package, Clock, CheckCircle, XCircle, Truck, CheckSquare, Loader2, ShieldCheck } from 'lucide-react';
 import pedidosService from '../services/pedidosService';
 import authService from '../services/authService';
 
-const ESTADOS = ['PENDIENTE', 'CONFIRMADO', 'ENVIADO', 'ENTREGADO', 'CANCELADO'];
+const ESTADOS = ['PENDIENTE', 'PAGADO', 'CONFIRMADO', 'ENVIADO', 'ENTREGADO', 'CANCELADO'];
 const SIGUIENTE_ESTADO = {
   PENDIENTE: 'CONFIRMADO',
+  PAGADO: 'CONFIRMADO',
   CONFIRMADO: 'ENVIADO',
   ENVIADO: 'ENTREGADO',
 };
 
 const ESTADO_CONFIG = {
   PENDIENTE: { color: 'bg-yellow-100 text-yellow-800', icon: Clock },
+  PAGADO: { color: 'bg-emerald-100 text-emerald-800', icon: CheckCircle },
   CONFIRMADO: { color: 'bg-blue-100 text-blue-800', icon: CheckCircle },
   ENVIADO: { color: 'bg-indigo-100 text-indigo-800', icon: Truck },
   ENTREGADO: { color: 'bg-green-100 text-green-800', icon: CheckSquare },
@@ -40,6 +42,13 @@ const GestionPedidos = ({ onNavigate }) => {
   const handleCambiarEstado = async (id, nuevoEstado) => {
     setProcesando(id);
     await pedidosService.cambiarEstado(id, nuevoEstado);
+    setProcesando(null);
+    cargar();
+  };
+
+  const handleVerificarPago = async (id) => {
+    setProcesando(id);
+    await pedidosService.verificarPago(id);
     setProcesando(null);
     cargar();
   };
@@ -113,6 +122,20 @@ const GestionPedidos = ({ onNavigate }) => {
                           <div className="bg-green-50 border border-green-200 rounded-lg px-3 py-2 text-xs">
                             <p className="text-green-700 font-medium">Pago Yape recibido</p>
                             <p className="text-green-600">Ref: {pedido.referenciaPago}</p>
+                            {pedido.estado === 'PENDIENTE' && (
+                              <button
+                                onClick={() => handleVerificarPago(pedido.id)}
+                                disabled={procesando === pedido.id}
+                                className="mt-2 w-full flex items-center justify-center gap-1 px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-medium hover:bg-emerald-700 disabled:bg-gray-300 transition-colors"
+                              >
+                                {procesando === pedido.id ? (
+                                  <Loader2 className="h-3 w-3 animate-spin" />
+                                ) : (
+                                  <ShieldCheck className="h-3 w-3" />
+                                )}
+                                Verificar pago
+                              </button>
+                            )}
                           </div>
                         ) : pedido.codigoPago ? (
                           <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-2 text-xs">
@@ -124,6 +147,23 @@ const GestionPedidos = ({ onNavigate }) => {
                     )}
                   </div>
                 </div>
+
+                {pedido.estado === 'PENDIENTE' && !esYape && (
+                  <div className="mt-4 border-t border-gray-100 pt-4 flex gap-2">
+                    <button
+                      onClick={() => handleVerificarPago(pedido.id)}
+                      disabled={procesando === pedido.id}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {procesando === pedido.id ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <ShieldCheck className="h-4 w-4" />
+                      )}
+                      Marcar como PAGADO
+                    </button>
+                  </div>
+                )}
 
                 {proxEstado && (
                   <div className="mt-4 border-t border-gray-100 pt-4 flex gap-2">

@@ -11,6 +11,7 @@ import com.marketplace.pacccioli.model.Producto.Estado;
 import com.marketplace.pacccioli.model.Usuario;
 import com.marketplace.pacccioli.repository.ComercioRepository;
 import com.marketplace.pacccioli.repository.ProductoRepository;
+import com.marketplace.pacccioli.service.ProductoService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class ProductoController {
     
     @Autowired
     private ComercioRepository comercioRepository;
+
+    @Autowired
+    private ProductoService productoService;
     
     /**
      * GET /api/productos - Obtener todos los productos
@@ -364,8 +368,8 @@ public class ProductoController {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body(new ApiResponseDTO<>(false, "No tienes permiso para eliminar este producto", null));
             }
-            
-            productoRepository.delete(producto);
+
+            productoService.eliminarProducto(id);
             
             return ResponseEntity.ok(new ApiResponseDTO<>(true, "Producto eliminado", null));
         } catch (Exception e) {

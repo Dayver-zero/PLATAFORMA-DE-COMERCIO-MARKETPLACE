@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PedidoItemRepository extends JpaRepository<PedidoItem, Long> {
     List<PedidoItem> findByPedidoId(Long pedidoId);
+    void deleteByProductoId(Long productoId);
 }

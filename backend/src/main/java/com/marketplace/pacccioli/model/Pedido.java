@@ -19,7 +19,7 @@ import java.util.List;
 public class Pedido {
 
     public enum EstadoPedido {
-        PENDIENTE, CONFIRMADO, ENVIADO, ENTREGADO, CANCELADO
+        PENDIENTE, PAGADO, CONFIRMADO, ENVIADO, ENTREGADO, CANCELADO
     }
 
     public enum MetodoPago {

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { CreditCard, Wallet, Smartphone, ArrowLeft, CheckCircle, Loader2 } from 'lucide-react';
+import { CreditCard, Wallet, Smartphone, ArrowLeft, CheckCircle, Loader2, Lock } from 'lucide-react';
 import carritoService from '../services/carritoService';
 import pedidosService from '../services/pedidosService';
 
 const METODOS_PAGO = [
   { id: 'EFECTIVO', label: 'Efectivo', icon: Wallet, desc: 'Paga cuando retires el producto' },
   { id: 'YAPE', label: 'Yape', icon: Smartphone, desc: 'Paga por adelantado con Yape' },
+  { id: 'TARJETA', label: 'Tarjeta', icon: CreditCard, desc: 'Paga con tarjeta de débito o crédito' },
 ];
 
 const Checkout = ({ onNavigate, metodoPagoInicial }) => {
@@ -15,6 +16,7 @@ const Checkout = ({ onNavigate, metodoPagoInicial }) => {
   const [procesando, setProcesando] = useState(false);
   const [error, setError] = useState(null);
   const [pedidoCreado, setPedidoCreado] = useState(null);
+  const [tarjeta, setTarjeta] = useState({ numero: '', titular: '', vencimiento: '', cvv: '' });
 
   useEffect(() => {
     const cargarCarrito = async () => {
@@ -35,7 +37,23 @@ const Checkout = ({ onNavigate, metodoPagoInicial }) => {
     try {
       const response = await pedidosService.crear(metodoPago);
       if (response.exito && response.datos) {
-        setPedidoCreado(response.datos);
+        const pedido = response.datos;
+
+        if (metodoPago === 'TARJETA') {
+          const pagoResponse = await pedidosService.pagarTarjeta(pedido.id, {
+            numeroTarjeta: tarjeta.numero,
+            titular: tarjeta.titular,
+            fechaVencimiento: tarjeta.vencimiento,
+            cvv: tarjeta.cvv,
+          });
+          if (pagoResponse.exito) {
+            setPedidoCreado(pagoResponse.datos);
+          } else {
+            setError(pagoResponse.mensaje || 'Error al procesar pago con tarjeta');
+          }
+        } else {
+          setPedidoCreado(response.datos);
+        }
       } else {
         setError(response.mensaje || 'Error al crear pedido');
       }
@@ -59,6 +77,7 @@ const Checkout = ({ onNavigate, metodoPagoInicial }) => {
 
   if (pedidoCreado) {
     const esYape = pedidoCreado.metodoPago === 'YAPE';
+    const esTarjeta = pedidoCreado.metodoPago === 'TARJETA';
 
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
@@ -80,6 +99,15 @@ const Checkout = ({ onNavigate, metodoPagoInicial }) => {
                 <p>4. Usa este código de referencia: <strong className="text-lg font-mono bg-yellow-100 px-3 py-1 rounded">{pedidoCreado.codigoPago}</strong></p>
                 <p>5. Vuelve a "Mis Pedidos" para confirmar el pago con tu número de operación</p>
               </div>
+            </div>
+          )}
+
+          {esTarjeta && (
+            <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-6 text-left">
+              <h3 className="font-bold text-green-800 mb-2">Pago con Tarjeta</h3>
+              <p className="text-sm text-green-700">
+                Pago procesado exitosamente. Tu pedido está en estado <strong>PAGADO</strong>.
+              </p>
             </div>
           )}
 
@@ -178,6 +206,48 @@ const Checkout = ({ onNavigate, metodoPagoInicial }) => {
             );
           })}
         </div>
+
+        {metodoPago === 'TARJETA' && (
+          <div className="mt-4 bg-gray-50 rounded-xl p-4 space-y-3">
+            <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+              <Lock className="h-4 w-4 text-green-500" />
+              <span>Pago seguro — tus datos están protegidos</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Número de tarjeta"
+              value={tarjeta.numero}
+              onChange={(e) => setTarjeta({ ...tarjeta, numero: e.target.value })}
+              maxLength={19}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+            />
+            <input
+              type="text"
+              placeholder="Titular de la tarjeta"
+              value={tarjeta.titular}
+              onChange={(e) => setTarjeta({ ...tarjeta, titular: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+            />
+            <div className="grid grid-cols-2 gap-3">
+              <input
+                type="text"
+                placeholder="MM/AA"
+                value={tarjeta.vencimiento}
+                onChange={(e) => setTarjeta({ ...tarjeta, vencimiento: e.target.value })}
+                maxLength={5}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+              />
+              <input
+                type="text"
+                placeholder="CVV"
+                value={tarjeta.cvv}
+                onChange={(e) => setTarjeta({ ...tarjeta, cvv: e.target.value })}
+                maxLength={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       <button

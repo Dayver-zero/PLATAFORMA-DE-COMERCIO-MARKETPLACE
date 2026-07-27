@@ -4,6 +4,7 @@ import pedidosService from '../services/pedidosService';
 
 const ESTADO_CONFIG = {
   PENDIENTE: { color: 'bg-yellow-100 text-yellow-800', icon: Clock },
+  PAGADO: { color: 'bg-emerald-100 text-emerald-800', icon: CheckCircle },
   CONFIRMADO: { color: 'bg-blue-100 text-blue-800', icon: CheckCircle },
   ENVIADO: { color: 'bg-indigo-100 text-indigo-800', icon: Truck },
   ENTREGADO: { color: 'bg-green-100 text-green-800', icon: CheckCircle },
@@ -133,6 +134,19 @@ const HistorialPedidos = ({ onNavigate }) => {
                           <span className="font-medium">Bs. {item.subtotal.toFixed(2)}</span>
                         </div>
                       ))}
+                    </div>
+                  )}
+
+                  {pedido.estado === 'PAGADO' && (
+                    <div className="mt-4 border-t border-gray-100 pt-4">
+                      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center">
+                        <p className="text-emerald-700 font-medium">Pago verificado</p>
+                        <p className="text-sm text-emerald-600">
+                          {pedido.metodoPago === 'TARJETA'
+                            ? 'Pago con tarjeta procesado exitosamente'
+                            : 'El comerciante ha verificado tu pago'}
+                        </p>
+                      </div>
                     </div>
                   )}
 

@@ -56,6 +56,22 @@ const pedidosService = {
       return { exito: false, mensaje: 'Error al obtener pedidos del comercio', datos: [] };
     }
   },
+
+  verificarPago: async (id) => {
+    try {
+      return await api.post(`/pedidos/${id}/pago/verificar`);
+    } catch (error) {
+      return error?.exito !== undefined ? error : { exito: false, mensaje: 'Error al verificar pago' };
+    }
+  },
+
+  pagarTarjeta: async (id, datosTarjeta) => {
+    try {
+      return await api.post(`/pedidos/${id}/pago/tarjeta`, datosTarjeta);
+    } catch (error) {
+      return error?.exito !== undefined ? error : { exito: false, mensaje: 'Error al procesar pago con tarjeta' };
+    }
+  },
 };
 
 export default pedidosService;

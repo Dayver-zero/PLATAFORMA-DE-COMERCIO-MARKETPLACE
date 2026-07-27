@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Building2, Star, Heart, ShoppingCart, Calendar, Smartphone, Check, Loader2 } from 'lucide-react';
 import carritoService from '../services/carritoService';
+import authService from '../services/authService';
 
 const API_HOST = (import.meta.env.VITE_API_URL || 'http://localhost:8080').replace(/\/api\/?$/, '');
 
@@ -28,6 +29,10 @@ const ProductCard = ({ producto, onNavigate, onReservar, onMostrarMensaje }) => 
   const precioAnterior = producto.precioAnterior || producto.precioOriginal;
 
   const handleAgregarAlCarrito = async () => {
+    if (!authService.estaAutenticado()) {
+      if (onNavigate) onNavigate('login');
+      return;
+    }
     setAgregando(true);
     try {
       const response = await carritoService.agregarItem(producto.id, 1);
@@ -44,6 +49,10 @@ const ProductCard = ({ producto, onNavigate, onReservar, onMostrarMensaje }) => 
   };
 
   const handleComprarYape = async () => {
+    if (!authService.estaAutenticado()) {
+      if (onNavigate) onNavigate('login');
+      return;
+    }
     setAgregando(true);
     try {
       await carritoService.agregarItem(producto.id, 1);

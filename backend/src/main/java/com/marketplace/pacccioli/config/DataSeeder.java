@@ -8,7 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -18,44 +17,21 @@ public class DataSeeder implements CommandLineRunner {
 
     private final UsuarioRepository usuarioRepository;
     private final ComercioRepository comercioRepository;
-    private final ProductoRepository productoRepository;
-    private final InteraccionRepository interaccionRepository;
-    private final CarritoRepository carritoRepository;
-    private final CarritoItemRepository carritoItemRepository;
-    private final PedidoRepository pedidoRepository;
-    private final PedidoItemRepository pedidoItemRepository;
-    private final ReservaRepository reservaRepository;
 
     private static final String PASSWORD_HASH = "$2a$10$GRLdNijSQmLFd4Z9xB5h.eKl3l4YzHPyKR2p5l8ZXQz3QMzWEW.YO";
 
     @Override
     @Transactional
     public void run(String... args) {
-        if (productoRepository.count() > 0) {
-            log.info("Base de datos ya tiene productos, se omite DataSeeder");
+        if (usuarioRepository.count() > 0) {
+            log.info("Base de datos ya tiene usuarios, se omite DataSeeder");
             return;
         }
 
         log.info("Insertando datos de prueba...");
-        limpiarDatos();
         seedUsuarios();
         seedComercios();
-        seedProductos();
-        seedInteracciones();
         log.info("Datos de prueba insertados exitosamente");
-    }
-
-    private void limpiarDatos() {
-        carritoItemRepository.deleteAll();
-        carritoRepository.deleteAll();
-        pedidoItemRepository.deleteAll();
-        pedidoRepository.deleteAll();
-        reservaRepository.deleteAll();
-        interaccionRepository.deleteAll();
-        productoRepository.deleteAll();
-        comercioRepository.deleteAll();
-        usuarioRepository.deleteAll();
-        log.info("Datos existentes eliminados");
     }
 
     private void seedUsuarios() {
@@ -215,110 +191,5 @@ public class DataSeeder implements CommandLineRunner {
         comercioRepository.save(techstore);
 
         log.info("Comercios insertados: 4");
-    }
-
-    private void seedProductos() {
-        Comercio tiendaCentral = comercioRepository.findById(1L).orElseThrow();
-        Comercio mercadoLocal = comercioRepository.findById(2L).orElseThrow();
-        Comercio boutique = comercioRepository.findById(3L).orElseThrow();
-        Comercio techstore = comercioRepository.findById(4L).orElseThrow();
-
-        productoRepository.save(crearProducto("Paraguas Premium", "Paraguas resistente al agua, 3 paneles apertura automática",
-                45.99, 20, tiendaCentral, "[\"lluvia\",\"proteccion\",\"imprescindible\"]", 4.8, true, true, true));
-        productoRepository.save(crearProducto("Chaqueta Térmica", "Chaqueta acolchada para abrigo en clima frío",
-                89.99, 15, tiendaCentral, "[\"frío\",\"abrigo\",\"invierno\"]", 4.7, true, true, false));
-        productoRepository.save(crearProducto("Sandalias Cómodas", "Sandalias para clima cálido",
-                34.50, 30, tiendaCentral, "[\"calor\",\"verano\",\"comodidad\"]", 4.4, true, false, false));
-        productoRepository.save(crearProducto("Gafas de Sol UV", "Gafas de protección solar",
-                52.00, 25, tiendaCentral, "[\"soleado\",\"proteccion\",\"moda\"]", 4.6, true, true, true));
-
-        productoRepository.save(crearProducto("Tomates Frescos", "Tomates de temporada, producción local",
-                3.50, 100, mercadoLocal, "[\"alimentos\",\"fresco\",\"saludable\"]", 4.9, true, false, false));
-        productoRepository.save(crearProducto("Lechuga Orgánica", "Lechuga verde orgánica, sin pesticidas",
-                2.75, 80, mercadoLocal, "[\"alimentos\",\"fresco\",\"organico\"]", 4.8, true, false, false));
-        productoRepository.save(crearProducto("Papas Locales", "Papas de variedad local, ideales para cocinar",
-                1.50, 200, mercadoLocal, "[\"alimentos\",\"basico\",\"fresco\"]", 4.7, true, false, false));
-        productoRepository.save(crearProducto("Manzanas Frescas", "Manzanas variedad roja, cosecha reciente",
-                4.20, 150, mercadoLocal, "[\"alimentos\",\"fruta\",\"saludable\"]", 4.5, true, false, false));
-
-        productoRepository.save(crearProducto("Suéter de Lana", "Suéter tejido de lana para abrigarse",
-                65.00, 10, boutique, "[\"frío\",\"abrigo\",\"comodidad\"]", 4.6, true, true, true));
-        productoRepository.save(crearProducto("Shorts Deportivos", "Shorts cómodos para clima cálido",
-                28.99, 25, boutique, "[\"calor\",\"deporte\",\"verano\"]", 4.3, true, false, false));
-
-        productoRepository.save(crearProducto("Power Bank 20000mAh", "Batería externa con carga rápida",
-                55.00, 18, techstore, "[\"tecnologia\",\"practico\",\"viaje\"]", 4.7, true, true, true));
-        productoRepository.save(crearProducto("Cable USB-C", "Cable de carga USB tipo C",
-                12.50, 50, techstore, "[\"tecnologia\",\"basico\",\"accesorio\"]", 4.4, true, false, true));
-
-        log.info("Productos insertados: 12");
-    }
-
-    private Producto crearProducto(String nombre, String descripcion, double precio, int stock,
-                                    Comercio comercio, String etiquetas, double calificacion,
-                                    boolean activo, boolean permiteReserva, boolean permitePagoAdelantado) {
-        Producto p = new Producto();
-        p.setNombre(nombre);
-        p.setDescripcion(descripcion);
-        p.setPrecio(BigDecimal.valueOf(precio));
-        p.setStock(stock);
-        p.setUrlImagen("/uploads/productos/sin-imagen.svg");
-        p.setCategoria(Producto.Categoria.OTROS);
-        p.setEtiquetasInteligentes(etiquetas);
-        p.setCalificacionPromedio(calificacion);
-        p.setConteoVisualizaciones(0);
-        p.setConteoCompras(0);
-        p.setActivo(activo);
-        p.setPermiteReserva(permiteReserva);
-        p.setPermitePagoAdelantado(permitePagoAdelantado);
-        p.setComercio(comercio);
-        p.setFechaCreacion(LocalDateTime.now());
-        p.setFechaActualizacion(LocalDateTime.now());
-        return p;
-    }
-
-    private void seedInteracciones() {
-        Usuario juan = usuarioRepository.findByEmail("juan@example.com").orElseThrow();
-        Usuario maria = usuarioRepository.findByEmail("maria@example.com").orElseThrow();
-        Producto paraguas = productoRepository.findById(1L).orElseThrow();
-        Producto tomates = productoRepository.findById(5L).orElseThrow();
-        Producto chaqueta = productoRepository.findById(2L).orElseThrow();
-        Producto lechuga = productoRepository.findById(6L).orElseThrow();
-        Producto papas = productoRepository.findById(7L).orElseThrow();
-        Producto gafas = productoRepository.findById(4L).orElseThrow();
-        Producto powerbank = productoRepository.findById(11L).orElseThrow();
-        Producto cable = productoRepository.findById(12L).orElseThrow();
-
-        interaccionRepository.save(crearInteraccion(juan, paraguas, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.RECOMENDACION, 45.99));
-        interaccionRepository.save(crearInteraccion(juan, paraguas, Interaccion.TipoInteraccion.CLICK, Interaccion.FuenteInteraccion.FEED, 45.99));
-        interaccionRepository.save(crearInteraccion(juan, paraguas, Interaccion.TipoInteraccion.COMPRA, Interaccion.FuenteInteraccion.DIRECTO, 45.99));
-        interaccionRepository.save(crearInteraccion(juan, tomates, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.BUSQUEDA, 3.50));
-        interaccionRepository.save(crearInteraccion(juan, tomates, Interaccion.TipoInteraccion.COMPRA, Interaccion.FuenteInteraccion.DIRECTO, 3.50));
-        interaccionRepository.save(crearInteraccion(juan, chaqueta, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.RECOMENDACION, 89.99));
-        interaccionRepository.save(crearInteraccion(maria, powerbank, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.BUSQUEDA, 55.00));
-        interaccionRepository.save(crearInteraccion(maria, powerbank, Interaccion.TipoInteraccion.CLICK, Interaccion.FuenteInteraccion.FEED, 55.00));
-        interaccionRepository.save(crearInteraccion(maria, cable, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.RECOMENDACION, 12.50));
-        interaccionRepository.save(crearInteraccion(maria, tomates, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.BUSQUEDA, 3.50));
-        interaccionRepository.save(crearInteraccion(juan, lechuga, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.RECOMENDACION, 2.75));
-        interaccionRepository.save(crearInteraccion(juan, papas, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.RECOMENDACION, 1.50));
-        interaccionRepository.save(crearInteraccion(juan, gafas, Interaccion.TipoInteraccion.VISUALIZACION, Interaccion.FuenteInteraccion.FEED, 52.00));
-
-        log.info("Interacciones insertadas: 13");
-    }
-
-    private Interaccion crearInteraccion(Usuario usuario, Producto producto,
-                                          Interaccion.TipoInteraccion tipo,
-                                          Interaccion.FuenteInteraccion fuente,
-                                          double precio) {
-        Interaccion i = new Interaccion();
-        i.setUsuario(usuario);
-        i.setProducto(producto);
-        i.setTipoInteraccion(tipo);
-        i.setFuente(fuente);
-        i.setPrecioMomento(BigDecimal.valueOf(precio));
-        i.setLatitudUsuario(usuario.getLatitud());
-        i.setLongitudUsuario(usuario.getLongitud());
-        i.setFechaInteraccion(LocalDateTime.now());
-        return i;
     }
 }

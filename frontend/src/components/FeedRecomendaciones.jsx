@@ -3,116 +3,7 @@ import { Sparkles, MapPin, Filter, RefreshCw, Cloud, Sun, Snowflake, Umbrella } 
 import ProductCard from './ProductCard';
 import climaService from '../services/climaService';
 import recomendacionesService from '../services/recomendacionesService';
-
-const PEXEL = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=1`;
-
-const PRODUCTOS_MOCK = [
-  {
-    id: 1, nombre: 'Paraguas Plegable', descripcion: 'Paraguas resistente al viento, ideal para días lluviosos',
-    precio: 45.00, precioAnterior: 60.00,
-    urlImagen: PEXEL(1451040),
-    nombreComercio: 'Tienda El Sol', distancia: 0.5,
-    etiquetasInteligentes: ['lluvia', 'protección'], calificacionPromedio: 4.5, stock: 15, comercioId: 1
-  },
-  {
-    id: 2, nombre: 'Chaqueta Térmica', descripcion: 'Chaqueta abrigada para días fríos, forro interior polar',
-    precio: 120.00, precioAnterior: 150.00,
-    urlImagen: PEXEL(9286989),
-    nombreComercio: 'Moda Punata', distancia: 0.8,
-    etiquetasInteligentes: ['frío', 'abrigo'], calificacionPromedio: 4.8, stock: 8, comercioId: 2
-  },
-  {
-    id: 3, nombre: 'Botas de Agua', descripcion: 'Botas impermeables para caminar bajo la lluvia',
-    precio: 85.00,
-    urlImagen: PEXEL(14479209),
-    nombreComercio: 'Calzado Local', distancia: 1.2,
-    etiquetasInteligentes: ['lluvia', 'calzado'], calificacionPromedio: 4.3, stock: 12, comercioId: 3
-  },
-  {
-    id: 4, nombre: 'Gorro de Lana', descripcion: 'Gorro tejido a mano, perfecto para el frío punateño',
-    precio: 25.00, precioAnterior: 35.00,
-    urlImagen: PEXEL(1124465),
-    nombreComercio: 'Artesanías Punata', distancia: 0.3,
-    etiquetasInteligentes: ['frío', 'abrigo'], calificacionPromedio: 4.6, stock: 20, comercioId: 4
-  },
-  {
-    id: 5, nombre: 'Guantes Térmicos', descripcion: 'Guantes con forro polar, mantienen tus manos calientes',
-    precio: 35.00,
-    urlImagen: PEXEL(2884869),
-    nombreComercio: 'Moda Punata', distancia: 0.8,
-    etiquetasInteligentes: ['frío', 'abrigo'], calificacionPromedio: 4.4, stock: 10, comercioId: 2
-  },
-  {
-    id: 6, nombre: 'Lentes de Sol', descripcion: 'Lentes polarizados con protección UV, ideales para días soleados',
-    precio: 65.00, precioAnterior: 90.00,
-    urlImagen: PEXEL(978808),
-    nombreComercio: 'Óptica Punata', distancia: 0.6,
-    etiquetasInteligentes: ['calor', 'protección'], calificacionPromedio: 4.7, stock: 6, comercioId: 5
-  },
-  {
-    id: 7, nombre: 'Sombrero de Ala Ancha', descripcion: 'Sombrero artesanal para protegerte del sol',
-    precio: 40.00,
-    urlImagen: PEXEL(1154390),
-    nombreComercio: 'Artesanías Punata', distancia: 0.3,
-    etiquetasInteligentes: ['calor', 'protección'], calificacionPromedio: 4.2, stock: 14, comercioId: 4
-  },
-  {
-    id: 8, nombre: 'Bloqueador Solar', descripcion: 'Protector solar FPS 50, resistente al agua',
-    precio: 55.00,
-    urlImagen: PEXEL(6476079),
-    nombreComercio: 'Farmacia Punata', distancia: 0.4,
-    etiquetasInteligentes: ['calor', 'protección'], calificacionPromedio: 4.9, stock: 25, comercioId: 6
-  },
-  {
-    id: 9, nombre: 'Abrigo de Invierno', descripcion: 'Abrigo largo acolchado, resistente al frío extremo',
-    precio: 200.00, precioAnterior: 250.00,
-    urlImagen: PEXEL(5825655),
-    nombreComercio: 'Tienda El Sol', distancia: 0.5,
-    etiquetasInteligentes: ['frío', 'abrigo'], calificacionPromedio: 4.8, stock: 5, comercioId: 1
-  },
-  {
-    id: 10, nombre: 'Bebida Hidratante', descripcion: 'Bebida isotónica natural, refrescante para el calor',
-    precio: 8.00,
-    urlImagen: PEXEL(30847728),
-    nombreComercio: 'Tienda El Sol', distancia: 0.5,
-    etiquetasInteligentes: ['calor'], calificacionPromedio: 4.0, stock: 50, comercioId: 1
-  },
-  {
-    id: 11, nombre: 'Chocolatería Artesanal', descripcion: 'Chocolate caliente en polvo, ideal para días fríos',
-    precio: 18.00, precioAnterior: 22.00,
-    urlImagen: PEXEL(926361),
-    nombreComercio: 'Artesanías Punata', distancia: 0.3,
-    etiquetasInteligentes: ['frío', 'casa'], calificacionPromedio: 4.7, stock: 30, comercioId: 4
-  },
-  {
-    id: 12, nombre: 'Impermeable para Moto', descripcion: 'Cubierta impermeable para motocicleta, días lluviosos',
-    precio: 95.00, precioAnterior: 130.00,
-    urlImagen: PEXEL(2246792),
-    nombreComercio: 'Repuestos Punata', distancia: 1.5,
-    etiquetasInteligentes: ['lluvia', 'protección'], calificacionPromedio: 4.1, stock: 7, comercioId: 7
-  },
-  {
-    id: 13, nombre: 'Helado Artesanal', descripcion: 'Helado cremoso de frutas, perfecto para el calor',
-    precio: 12.00,
-    urlImagen: PEXEL(29241942),
-    nombreComercio: 'Heladería Punata', distancia: 0.2,
-    etiquetasInteligentes: ['calor'], calificacionPromedio: 4.9, stock: 40, comercioId: 8
-  },
-  {
-    id: 14, nombre: 'Chaleco Reflectivo', descripcion: 'Chaleco de seguridad reflectivo, visible en días nublados/lluvia',
-    precio: 30.00,
-    urlImagen: PEXEL(1208468),
-    nombreComercio: 'Repuestos Punata', distancia: 1.5,
-    etiquetasInteligentes: ['lluvia', 'protección'], calificacionPromedio: 4.3, stock: 18, comercioId: 7
-  },
-  {
-    id: 15, nombre: 'Ventilador Portátil', descripcion: 'Ventilador USB recargable, alivio instantáneo del calor',
-    precio: 45.00, precioAnterior: 55.00,
-    urlImagen: PEXEL(28792263),
-    nombreComercio: 'Electro Punata', distancia: 0.7,
-    etiquetasInteligentes: ['calor', 'casa'], calificacionPromedio: 4.5, stock: 22, comercioId: 9
-  }
-];
+import productosService from '../services/productosService';
 
 const CONDICION_CLIMA = {
   LLOVIENDOSO: ['lluvia', 'lluvioso', 'lloviendo', 'rain', 'drizzle', 'thunderstorm'],
@@ -147,7 +38,6 @@ const FeedRecomendaciones = ({ onReservar, onNavigate, onMostrarMensaje }) => {
   const [filtroActivo, setFiltroActivo] = useState('todos');
   const [ubicacionUsuario, setUbicacionUsuario] = useState(null);
   const [climaActual, setClimaActual] = useState(null);
-  const [usandoBackend, setUsandoBackend] = useState(false);
 
   const fetchClima = useCallback(async (lat, lng) => {
     try {
@@ -155,6 +45,15 @@ const FeedRecomendaciones = ({ onReservar, onNavigate, onMostrarMensaje }) => {
       setClimaActual(clima);
     } catch {
       setClimaActual(null);
+    }
+  }, []);
+
+  const cargarProductosPublicos = useCallback(async () => {
+    const res = await productosService.obtenerTodos();
+    if (res?.exito && res.datos?.length > 0) {
+      setRecomendaciones(res.datos);
+    } else {
+      setRecomendaciones([]);
     }
   }, []);
 
@@ -170,25 +69,23 @@ const FeedRecomendaciones = ({ onReservar, onNavigate, onMostrarMensaje }) => {
       };
       setUbicacionUsuario(ubicacion);
 
-      let data = null;
-      try {
-        const usuario = JSON.parse(localStorage.getItem('usuario'));
-        const usuarioId = usuario?.id;
-        if (usuarioId) {
-          data = await recomendacionesService.obtenerRecomendaciones(usuarioId, ubicacion.latitud, ubicacion.longitud);
+      const usuario = JSON.parse(localStorage.getItem('usuario'));
+      const usuarioId = usuario?.id;
+
+      if (usuarioId) {
+        try {
+          const data = await recomendacionesService.obtenerRecomendaciones(usuarioId, ubicacion.latitud, ubicacion.longitud);
+          if (data && data.length > 0) {
+            setRecomendaciones(data);
+            await fetchClima(ubicacion.latitud, ubicacion.longitud);
+            return;
+          }
+        } catch {
+          // fallback a productos públicos
         }
-      } catch {
-        // fallback a mock
       }
 
-      if (data && data.length > 0) {
-        setRecomendaciones(data);
-        setUsandoBackend(true);
-      } else {
-        setRecomendaciones(PRODUCTOS_MOCK);
-        setUsandoBackend(false);
-      }
-
+      await cargarProductosPublicos();
       await fetchClima(ubicacion.latitud, ubicacion.longitud);
     } catch (err) {
       setError('Error al cargar recomendaciones');
@@ -196,7 +93,7 @@ const FeedRecomendaciones = ({ onReservar, onNavigate, onMostrarMensaje }) => {
     } finally {
       setLoading(false);
     }
-  }, [fetchClima]);
+  }, [fetchClima, cargarProductosPublicos]);
 
   useEffect(() => { fetchRecomendaciones(); }, [fetchRecomendaciones]);
 
@@ -208,7 +105,7 @@ const FeedRecomendaciones = ({ onReservar, onNavigate, onMostrarMensaje }) => {
     switch (filtroActivo) {
       case 'clima': {
         const condicion = getCondicionClima(climaActual);
-        if (condicion && PRODUCTOS_MOCK.length > 0) {
+        if (condicion && items.length > 0) {
           items = items.filter(p => p.etiquetasInteligentes?.includes(condicion));
           if (items.length === 0) items = [...recomendaciones];
         }
@@ -332,7 +229,7 @@ const FeedRecomendaciones = ({ onReservar, onNavigate, onMostrarMensaje }) => {
       ) : (
         <div className="text-center py-12">
           <Sparkles className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600">No hay productos para este filtro</p>
+          <p className="text-gray-600">No hay productos disponibles</p>
         </div>
       )}
     </div>

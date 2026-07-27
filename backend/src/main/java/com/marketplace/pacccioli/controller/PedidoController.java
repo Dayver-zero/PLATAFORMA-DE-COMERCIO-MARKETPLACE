@@ -142,6 +142,54 @@ public class PedidoController {
         }
     }
 
+    @PostMapping("/{id}/pago/verificar")
+    public ResponseEntity<ApiResponseDTO<PedidoDTO>> verificarPago(
+            @PathVariable Long id,
+            HttpServletRequest request) {
+        try {
+            Long usuarioId = (Long) request.getAttribute("usuarioId");
+            if (usuarioId == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ApiResponseDTO<>(false, "Usuario no autenticado", null));
+            }
+
+            PedidoDTO pedido = pedidoService.verificarPago(id, usuarioId);
+            return ResponseEntity.ok(new ApiResponseDTO<>(true, "Pago verificado. Pedido en estado PAGADO", pedido));
+        } catch (SecurityException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(new ApiResponseDTO<>(false, e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new ApiResponseDTO<>(false, e.getMessage(), null));
+        }
+    }
+
+    @PostMapping("/{id}/pago/tarjeta")
+    public ResponseEntity<ApiResponseDTO<PedidoDTO>> procesarPagoTarjeta(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> body,
+            HttpServletRequest request) {
+        try {
+            Long usuarioId = (Long) request.getAttribute("usuarioId");
+            if (usuarioId == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ApiResponseDTO<>(false, "Usuario no autenticado", null));
+            }
+
+            String numeroTarjeta = body.get("numeroTarjeta");
+            String titular = body.get("titular");
+            String fechaVencimiento = body.get("fechaVencimiento");
+            String cvv = body.get("cvv");
+
+            PedidoDTO pedido = pedidoService.procesarPagoTarjeta(id, usuarioId,
+                    numeroTarjeta, titular, fechaVencimiento, cvv);
+            return ResponseEntity.ok(new ApiResponseDTO<>(true, "Pago con tarjeta procesado exitosamente", pedido));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(new ApiResponseDTO<>(false, e.getMessage(), null));
+        }
+    }
+
     @GetMapping("/comercio")
     public ResponseEntity<ApiResponseDTO<List<PedidoDTO>>> obtenerPedidosComercio(HttpServletRequest request) {
         try {
