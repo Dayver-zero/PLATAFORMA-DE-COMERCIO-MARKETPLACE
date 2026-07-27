@@ -66,12 +66,45 @@ cd PLATAFORMA-DE-COMERCIO-MARKETPLACE
 
 ### 2. Configurar la Base de Datos
 
-Crear la base de datos en MySQL:
+#### 2.1 Verificar tu conexión MySQL
 
+Antes de crear la BD, necesitas saber en qué **puerto** corre MySQL y cuál es tu **usuario/contraseña**.
+
+**Opción A — Desde MySQL Workbench:**
+1. Abre MySQL Workbench
+2. En la pantalla de inicio, busca tu conexión (ej: `Local instance MySQL80`)
+3. Dice el puerto al lado: `...:3306` o `...:3307`
+4. Si puedes conectarte, anota el **puerto**, **usuario** y **contraseña** que usas
+
+**Opción B — Desde terminal:**
+```bash
+# Ver qué servicios de MySQL existen
+Get-Service MySQL* -ErrorAction SilentlyContinue
+
+# Ver en qué puerto está escuchando MySQL
+netstat -ano | findstr :330
+```
+
+Si el comando no muestra nada, MySQL no está corriendo. Inícialo:
+```bash
+net start MySQL80
+```
+(Prueba también con `net start MySQL` o `net start MySQL8` según tu versión)
+
+#### 2.2 Crear la base de datos
+
+**Desde MySQL Workbench (recomendado):**
+1. Conéctate a tu instancia local
+2. Ve a `File > New Query Tab` o presiona `Ctrl + T`
+3. Pega y ejecuta:
+```sql
+CREATE DATABASE marketplace_pacccioli;
+```
+
+**Desde terminal:**
 ```bash
 mysql -u root -p
 ```
-
 ```sql
 CREATE DATABASE marketplace_pacccioli;
 EXIT;
@@ -79,14 +112,34 @@ EXIT;
 
 ### 3. Configurar credenciales de BD
 
-Editar `backend/src/main/resources/application.properties` y cambiar usuario/contraseña si es necesario:
+Editar `backend/src/main/resources/application.properties` y **reemplaza puerto, usuario y contraseña** con los tuyos:
 
 ```properties
+# ─── CONEXIÓN A MYSQL ──────────────────────────────────
+# CAMBIA 3306 por el puerto de tu MySQL (ej: 3307 si usas ese)
+spring.datasource.url=jdbc:mysql://localhost:3306/marketplace_pacccioli?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+
+# CAMBIA por tu usuario de MySQL (normalmente "root")
 spring.datasource.username=root
+
+# CAMBIA por tu contraseña de MySQL
 spring.datasource.password=tu_contraseña
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 ```
 
+> **Importante:** Si tu MySQL usa el puerto **3307**, cambia `localhost:3306` por `localhost:3307` en la URL.
+
 > **Nota:** Hibernate crea automáticamente las 10 tablas al iniciar (`ddl-auto=update`). No necesitas ejecutar ningún script SQL manualmente.
+
+#### 3.1 Verificar que la conexión funciona
+
+Inicia el backend (paso 4) y revisa la consola. Si no ves errores en rojo, la conexión fue exitosa. Deberías ver algo como:
+```
+Initialized JPA EntityManagerFactory
+Tomcat started on port 8080
+```
 
 ### 4. Iniciar el Backend
 
@@ -232,6 +285,15 @@ marketplace-pacccioli/
 
 ## Solución de Problemas
 
+### Error de conexión a MySQL
+
+| Error | Causa | Solución |
+|---|---|---|
+| `ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)` | MySQL no está corriendo o está en otro puerto | `net start MySQL80` o verifica el puerto desde Workbench y cámbialo en `application.properties` |
+| `ERROR 1045 (28000): Access denied for user 'root'@'localhost'` | Contraseña incorrecta en `application.properties` | Cambia `spring.datasource.password` por la contraseña real que usas en Workbench |
+| `ERROR 1049 (42000): Unknown database 'marketplace_pacccioli'` | La base de datos no fue creada | Crea la BD desde Workbench: `CREATE DATABASE marketplace_pacccioli;` |
+| `java.sql.SQLNonTransientConnectionException: Public Key Retrieval is not allowed` | Error de conexión SSL | Agrega `allowPublicKeyRetrieval=true` y `useSSL=false` en la URL (ya está incluido) |
+
 ### Puerto 8080 ya está en uso
 
 ```bash
@@ -239,32 +301,44 @@ netstat -ano | findstr :8080
 taskkill /PID <PID> /F
 ```
 
-### Error de conexión a MySQL
-
-Verificar que MySQL esté corriendo:
+### Puerto 3000 ya está en uso (frontend)
 
 ```bash
-net start MySQL
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+```
+O cambia el puerto en `frontend/vite.config.js`:
+```js
+server: { port: 3001 }
 ```
 
 ### Las imágenes no se cargan
 
-Las imágenes locales están en `backend/uploads/productos/`. Verificar que el backend esté corriendo en el puerto 8080.
+Las imágenes locales están en `backend/uploads/productos/`. Verifica que el backend esté corriendo en `http://localhost:8080`.
 
 ### El frontend no conecta con el backend
 
-Verificar configuración en `frontend/.env`:
-
+Verifica configuración en `frontend/.env`:
 ```
 VITE_API_URL=http://localhost:8080/api
 ```
 
 ### Error de compilación con Lombok
 
-Asegurarse de que el IDE tenga Lombok configurado o compilar con Maven directamente:
-
 ```bash
 mvn clean compile -DskipTests
+```
+
+### Error 401 Unauthorized en peticiones
+
+El token JWT expiró o no se envió correctamente. Vuelve a iniciar sesión en la aplicación.
+
+### Error al hacer `npm install`
+
+```bash
+# Limpiar caché y reintentar
+npm cache clean --force
+npm install
 ```
 
 ---
